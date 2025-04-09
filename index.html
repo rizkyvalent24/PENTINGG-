@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nembak Cewek - Terima atau Tolak</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      color: #f06;
+      font-size: 32px;
+    }
+
+    p {
+      color: #333;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff66b2;
+      color: white;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .accept-button {
+      background-color: #66ff66;
+    }
+
+    .reject-button {
+      background-color: #ff6666;
+    }
+
+    .disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #responseMessage {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    #responseMessage.green {
+      color: #66ff66;
+    }
+
+    #responseMessage.orange {
+      color: #ff6666;
+    }
+
+    /* Animasi untuk tombol Terima */
+    .accept-button.animate {
+      animation: bounce 0.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>R U MINE?</h1>
+    <p>Pilih "Terima" atau "Tolak"</p>
+    <div class="buttons">
+      <button id="acceptButton" class="accept-button">Terima</button>
+      <button id="rejectButton" class="reject-button">Tolak</button>
+    </div>
+    <p id="responseMessage"></p>
+  </div>
+
+  <script>
+    const acceptButton = document.getElementById('acceptButton');
+    const rejectButton = document.getElementById('rejectButton');
+    const responseMessage = document.getElementById('responseMessage');
+
+    // Ganti link berikut dengan link Google Form yang sesuai
+    const googleFormUrl = "https://forms.gle/yZSyN7oLowgmAdga7"; // Gantilah dengan URL Google Form Anda
+
+    rejectButton.addEventListener('click', function() {
+      // Nonaktifkan tombol Tolak dan beri animasi pada tombol Terima
+      rejectButton.classList.add('disabled');
+      acceptButton.classList.add('animate');
+
+      responseMessage.textContent = "Tunggu dulu! Kamu harus menekan 'Terima'.";
+      responseMessage.className = "orange";
+
+      // Menghapus animasi setelah beberapa detik dan membiarkan Terima diaktifkan
+      setTimeout(() => {
+        responseMessage.textContent = "Meskipun kamu menolak, aku tetap menghargai jawabanmu!";
+        responseMessage.className = "orange";
+      }, 2000);
+    });
+
+    acceptButton.addEventListener('click', function() {
+      // Arahkan pengguna ke Google Form setelah menekan "Terima"
+      window.location.href = googleFormUrl;
+      
+      // Menampilkan pesan sebelum mengarahkan
+      responseMessage.textContent = "Terima kasih! Kamu telah menerima perasaanku.";
+      responseMessage.className = "green";
+
+      // Mengatur ulang tombol
+      rejectButton.classList.remove('disabled');
+      acceptButton.classList.remove('animate');
+    });
+  </script>
+</body>
+</html>
